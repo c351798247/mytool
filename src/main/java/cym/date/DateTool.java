@@ -3,6 +3,7 @@ package cym.date;
 import com.sun.istack.internal.NotNull;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,6 +13,11 @@ import java.util.Date;
 public class DateTool {
     private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    /**
+     *
+     * @param date
+     * @return
+     */
     public static String dateToString(@NotNull Date date) {
         try {
             return dateFormat.format(date);
@@ -33,7 +39,23 @@ public class DateTool {
         return dateString;
     }
 
+    /**
+     *
+     * @param dateString
+     * @param format
+     * @return 若转换失败，则返回null
+     */
+    public static Date StringToDate(String dateString, String format) {
+        try {
+            return new SimpleDateFormat(format).parse(dateString);
+        } catch (ParseException e) {
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println(DateTool.dateToString(null));
+        System.out.println(DateTool.StringToDate(null,null));
     }
 }
