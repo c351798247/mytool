@@ -13,9 +13,19 @@ import java.io.IOException;
  * Created by Administrator on 2019/9/19.
  */
 public class POIDemo {
+    public static final int NONE_ALL_BORDER = 0;    //无边框
+    public static final int ALL_BORDER = 1;         //全边框
+    public static final int NONE_LEFT_BORDER = 2;   //无左边框
+    public static final int NONE_RIGHT_BORDER = 3;  //无右边框
+    public static final int NONE_TOP_BORDER = 4;    //无上边框
+    public static final int NONE_BOTTOM_BORDER = 5; //无底部边框
     public static void main(String[] args) throws IOException {
-
-
+        SXSSFWorkbook workbook = new SXSSFWorkbook();
+        Sheet sheet0 = workbook.createSheet("sheet0");
+        Font song = createFont(workbook, "宋体", ((short) 10));
+        CellStyle cellStyle = createCellStyle(workbook, song, ALL_BORDER,HSSFColor.BLACK.index);
+        setValue(sheet0,cellStyle,22+"",false,0,0,0,0);
+        finished(workbook,"test.xlsx");
     }
 
     /**
@@ -80,7 +90,7 @@ public class POIDemo {
      *                              3无右边框
      *                              4无上边框
      *                              5无下边框
-     * @param backgroundColor 背景色
+     * @param backgroundColor 背景色 HSSFColor.[颜色].index
      * @return
      */
     public static CellStyle createCellStyle(SXSSFWorkbook workbook,Font font,int borderState,short backgroundColor) {
