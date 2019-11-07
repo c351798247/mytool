@@ -8,6 +8,8 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2019/9/19.
@@ -28,6 +30,22 @@ public class POIDemo {
         finished(workbook,"test.xlsx");
     }
 
+    /**
+     * 适用于数据类型为List<Map<String,Object>>
+     * @param sheet     sheet
+     * @param cellStyle 单元格样式
+     * @param startRow  起始行号
+     * @param columns   字段名数组
+     * @param data      数据
+     */
+    public static void setExcelDataBody(Sheet sheet, CellStyle cellStyle, int startRow, String[] columns, List<Map<String,Object>> data) {
+        for (Map<String, Object> map : data) {
+            for (int i = 0; i < columns.length; i++) {
+                setValue(sheet, cellStyle, map.get(columns[i]) != null ? map.get(columns[i]).toString() : "", false, startRow, startRow, i, i);
+            }
+            startRow++;
+        }
+    }
     /**
      *
      * @param sheet     sheet
