@@ -12,6 +12,17 @@ public class BigDecimalUtil {
         System.out.println(add(null, "3"));
     }
 
+    public static BigDecimal round(Object o, int newScale) {
+        BigDecimal b = new BigDecimal(0);
+        if (o instanceof BigDecimal) {
+            b = ((BigDecimal) o).setScale(newScale,BigDecimal.ROUND_HALF_UP);
+        } else {
+            if (o != null) {
+                b = new BigDecimal(o.toString()).setScale(newScale, BigDecimal.ROUND_HALF_UP);
+            }
+        }
+        return b;
+    }
     public static BigDecimal add(BigDecimal b1, Object o2) {
         try {
             if (b1 == null) {
