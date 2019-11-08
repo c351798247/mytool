@@ -14,13 +14,19 @@ public class BigDecimalUtil {
 
     public static BigDecimal round(Object o, int newScale) {
         BigDecimal b = new BigDecimal(0);
-        if (o instanceof BigDecimal) {
-            b = ((BigDecimal) o).setScale(newScale,BigDecimal.ROUND_HALF_UP);
-        } else {
-            if (o != null) {
-                b = new BigDecimal(o.toString()).setScale(newScale, BigDecimal.ROUND_HALF_UP);
+        try {
+
+            if (o instanceof BigDecimal) {
+                b = ((BigDecimal) o).setScale(newScale, BigDecimal.ROUND_HALF_UP);
+            } else {
+                if (o != null) {
+                    b = new BigDecimal(o.toString()).setScale(newScale, BigDecimal.ROUND_HALF_UP);
+                }
             }
+        } catch (NumberFormatException e) {
+            System.err.println("存在非数字字符");
         }
+
         return b;
     }
     public static BigDecimal add(BigDecimal b1, Object o2) {
