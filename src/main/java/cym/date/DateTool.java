@@ -1,6 +1,5 @@
 package cym.date;
 
-import com.sun.istack.internal.NotNull;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -18,14 +17,14 @@ public class DateTool {
      * @param date
      * @return
      */
-    public static String dateToString(@NotNull Date date) {
+    public static String dateToString( Date date) {
         try {
             return dateFormat.format(date);
         } catch (Exception e) {
             return "日期转换异常";
         }
     }
-    public static String dateToString(@NotNull Date date, String format) {
+    public static String dateToString( Date date, String format) {
         String dateString = "";
         if (format == null) {
             dateString = dateFormat.format(date);
